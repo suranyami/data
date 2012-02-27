@@ -4,6 +4,10 @@ require "json"
 output "tests/source"
 
 input "packages" do
+  match "**/*.coffee" do
+    filter Rake::Pipeline::Web::Filters::CoffeeScriptFilter
+  end
+
   match "*/{lib,tests}/**/*.js" do
     minispade :rewrite_requires => true, :string => true, :module_id_generator => proc { |input|
       id = input.path.dup
